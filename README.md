@@ -14,4 +14,4 @@ This is a learning suite based on PHP Slim micro framework. Created in order to 
 | td1 | td2 | td3 | td4 |
 -->
 
-### 🤝 Interested in colaboration ? Feel fre to join! 😎
+### 🤝 Interested in colaboration ? Feel free to join! 😎
