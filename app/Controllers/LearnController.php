@@ -29,6 +29,9 @@ class LearnController extends BaseController
             case 2:
                 return $this->task2_process($S);
                 break;
+            case 3:
+                return $this->task3_process($S);
+                break;
             default:
                 return false;
         }
@@ -54,6 +57,12 @@ class LearnController extends BaseController
                     'aaaa'
                 ];
                 break;
+            case 3:
+                return [
+                    [100, 100, 100, -10], 
+                    ['2020-12-31', '2020-12-22', '2020-12-03', '2020-12-29']
+                ];
+                break;    
             default:
                 return false;
         }
@@ -89,38 +98,35 @@ class LearnController extends BaseController
          *  if there are on a - false
          *  if there are on b - true
          * */
-        $str = $S;
-        $bool = false;
+        $posa = strpos($S, 'a');
+        $posb = strpos($S, 'b');
 
-        $a = [];
-        $b = [];
-
-        for ($i = 0; $i < strlen($str); $i++) {
-            $posa = strpos($str, 'a');
-            $posb = strpos($str, 'b');
-
-            $this->console_log($posa);
-            $this->console_log($posb);
-
-            if ($posa == 'false') {$bool = false; break;}
-            elseif ($posb == 'false') {$bool = true; break;}
-            else {
-                $a[] = $posa;
-                $b[] = $posb;
-    
-                $this->console_log($a);
-                $this->console_log($b);
-    
-                $str = substr($str, 0, $posa) . substr($str, $posa + 1, strlen($str) - 1);
-                $str = substr($str, 0, $posb) . substr($str, $posb + 1, strlen($str) - 1);
-            }
-
+        if ($posa === false) {
+            return json_encode(false);
+        }
+        if ($posb === false) {
+            return json_encode(true);
         }
 
-        $this->console_log($a);
-        $this->console_log($b);
+        $lasta = strrpos($S, 'a');
+        $firstb = strrpos($S, 'b');
 
-        return json_encode($bool);
+        return json_encode($lasta > $firstb);
+    }
+
+    function task3_process($S)
+    {
+        /**
+         *  Given list of transactions. Each transaction specifies the amount and the date it was executed.
+         *  If amount negative - then it was a card payment. Otherwise it was an incomming transfer. (amount at least 0)
+         *  The date of each transaction is in YYYY-MM-DD format.
+         *  Additionally there is a fee for having a card (ommited in the given transaction list), which is 5 per month.
+         *  This fee is deducted from the account balance at the end of each month unless there were at least three payments made by card for a total cost of at least 100 within tha month.
+         *  Task is to compute the final balance of th account at the end of the year 2020.
+         *  Write a function, that given an array A of N integers representing transaction amounts and an attay D of N strings representing transaction dates, returns the final balance of the account at the end of the year 2020.
+         * */
+        
+        return false;
     }
 
     function exec_monitor($fn, $S)

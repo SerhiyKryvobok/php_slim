@@ -4,9 +4,14 @@ This is a learning suite based on PHP Slim micro framework. Created in order to 
 > [!NOTE]
 > On setup stage.
 
+> [!TIP]
+> Additional development vector opened. PHP learning suite under Slim arch.
+
 ## Task list:
 - [x] Intoduction :tada:
 - [x] Basic php slim framework setup
+- [x] Added some PHP learning suite tasks, as separate part of a project but under same arch.
+- [x] Added additional task to PHP learning suite.
 - [ ] ...
 
 <!-- ## Tech stack
