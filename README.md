@@ -6,6 +6,7 @@ This is a learning suite based on PHP Slim micro framework. Created in order to 
 
 ## Task list:
 - [x] Intoduction :tada:
+- [x] Basic php slim framework setup
 - [ ] ...
 
 <!-- ## Tech stack

@@ -12,4 +12,10 @@ class BaseController
     {
         $this->container = $container;
     }
+
+    function console_log($msg)
+    {
+        $message = json_encode($msg);
+        echo "<script>console.log({$message})</script>";
+    }
 }
