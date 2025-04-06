@@ -19,7 +19,10 @@ class FrontendStufTest extends Selenium2TestCase {
         $this->setBrowserUrl(PHPUNIT_TESTSUITE_EXTENSION_SELENIUM_TESTS_URL);
     }
 
-    public function testCanSeeCorrectStringsOnMainPage()
+    /**
+     * @covers PHPUnit\Extensions\Selenium2TestCase
+     */
+    public function testCanSeeCorrectStringsOnMainPage(): void
     {
         $this->url('');
         // $this->assertContains('Add a new category', $this->source());

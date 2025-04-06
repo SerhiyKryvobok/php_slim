@@ -4,6 +4,7 @@ use App\Controllers\HomeController;
 use App\Controllers\LearnController;
 
 
-$app->get('/hello/{name}', HomeController::class . ':home');
+$app->get('/', HomeController::class . ':home');
 
+// Learn tasks route
 $app->get('/task/{task}', LearnController::class . ':task');

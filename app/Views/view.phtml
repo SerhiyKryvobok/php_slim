@@ -1,8 +1,84 @@
 <?php include('layout/header.phtml'); ?>
-<h1>Hello <?=$name;?></h1>
-<?php foreach ($data as $user) : ?>
-    <?=$user['name']?>
-    <a href="<?=$user['name']?>">view</a>
-<?php endforeach; ?>
+<div class="grid-container">
+    <div class="grid-x grid-margin-x">
+        <div class="medium-6 cell">
+        <h3>
+            Edit/Add a new category
+        </h3>
+        <div class="callout success">
+            Category was saved
+        </div>
+        <div class="callout alert">
+            Fill correctly the form
+        </div>
+        <label
+            >Name
+            <input type="text" placeholder="Name" />
+        </label>
+        <label
+            >Description
+            <textarea placeholder="Description"></textarea>
+        </label>
+        <label
+            >Parent category
+            <select>
+            <option>--choose--</option>
+            <option value="">Electronics</option>
+            <option value="">&nbsp;&nbsp;Monitors</option>
+            <option value="">&nbsp;&nbsp;Tablets</option>
+            <option value="">&nbsp;&nbsp;Computers</option>
+            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;Desktops</option>
+            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;Notebooks</option>
+            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;Laptops</option>
+            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Asus</option>
+            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dell</option>
+            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Acer</option>
+            <option value=""
+                >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FullHD</option
+            >
+            <option value=""
+                >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HD+</option
+            >
+            <option value="">Videos</option>
+            <option value="">Software</option>
+            <option value="">&nbsp;&nbsp;Operating systems</option>
+            <option value="">&nbsp;&nbsp;&nbsp;&nbsp;Linux</option>
+            <option value="">&nbsp;&nbsp;Servers</option>
+            </select>
+        </label>
+        <input
+            type="submit"
+            class="button expanded"
+            value="Save category"
+        />
+        </div>
+
+        <div class="medium-6 large-5 cell large-offset-1">
+        <div class="basic-card">
+            <div class="basic-card-content content callout secondary">
+            <h5>Computers</h5>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi
+                saepe, asperiores dolor nesciunt dolore, accusamus minus
+                repellendus vero odio, quibusdam, ipsum nisi in a molestiae ex
+                assumenda nulla eveniet eos!
+            </p>
+            </div>
+            <div class="links callout primary">
+            <ul class="menu">
+                <li>
+                <a href="#">Edit</a>
+                </li>
+                <li>
+                <a href="#">Delete</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <hr />
+</div>
 <?php include('layout/footer.phtml'); ?>
 
