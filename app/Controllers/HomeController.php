@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class FirstController extends BaseController
+class HomeController extends BaseController
 {
     public function home($request, $response, $args)
     {
