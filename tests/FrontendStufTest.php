@@ -28,4 +28,29 @@ class FrontendStufTest extends Selenium2TestCase {
         // $this->assertContains('Add a new category', $this->source());
         $this->assertStringContainsString('Add a new category', $this->source());
     }
+
+    public function testCanSeConfirmDialogBoxWhenTryingToDeleteCategory()
+    {
+        $this->url('');
+        $this->clickOnElement('deletecategoryconfirmation');
+        $this->waitUntil(function () {
+            if ($this->alertIsPresent()) return true;
+            return null;
+        }, 4000);
+        $this->dismissAlert();
+        $this->assertTrue(true);
+    }
+
+    public function testCanSeeCorrectMessageAfterDeletingCategory()
+    {
+        $this->url('');
+        $this->clickOnElement('deletecategoryconfirmation');
+        $this->waitUntil(function () {
+            if ($this->alertIsPresent()) return true;
+            return null;
+        }, 4000);
+        $this->acceptAlert();
+        $this->assertStringContainsString('Category was deleted', $this->source());
+        $this->markTestIncomplete('Message about deleted category should appear after redirection');
+    }
 }

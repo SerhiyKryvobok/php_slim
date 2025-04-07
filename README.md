@@ -17,6 +17,9 @@ This is a learning suite based on PHP Slim micro framework. Created in order to 
 > [!IMPORTANT]
 > For this env use next line (& files) to start selenium server: java "-Dwebdriver.gecko.driver=geckodriver.exe" -jar selenium-server-3.5.0.jar
 
+> [!CAUTION]
+> Due to misleading in versions or outdating in between phpunit-selenium and webdriver or etc, there are necesity in correction of local core vendor functionality.
+
 ## Second iteration task list:
 - [x] TDD continues
 - [ ] ...
@@ -29,8 +32,6 @@ This is a learning suite based on PHP Slim micro framework. Created in order to 
 > [!WARNING]
 > Urgent info that needs immediate user attention to avoid problems.
 
-> [!CAUTION]
-> Advises about risks or negative outcomes of certain actions.
 -->
 
 ### 🤝 Interested in colaboration ? Feel free to join! 😎
