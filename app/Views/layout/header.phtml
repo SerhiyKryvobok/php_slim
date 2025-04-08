@@ -17,11 +17,11 @@
     <div class="top-bar">
     <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu>
-        <li class="menu-text">Multi level categories</li>
+        <li class="menu-text"><a href="<?= $baseUrl; ?>">Multi level categories</a></li>
         <li class="has-submenu">
-            <a href="#">Electronics</a>
+            <a href="<?= $baseUrl; ?>show-category/1">Electronics</a>
             <ul class="submenu menu vertical" data-submenu>
-            <li><a href="#">Monitors</a></li>
+            <li><a href="<?= $baseUrl; ?>show-category/2,Monitors">Monitors</a></li>
             <li><a href="#">Tablets</a></li>
             <li>
                 <a href="#">Computers</a>
@@ -36,7 +36,7 @@
                     <li>
                         <a href="#">Acer</a>
                         <ul class="submenu menu vertical" data-submenu>
-                        <li><a href="#">FullHD</a></li>
+                        <li><a href="<?= $baseUrl; ?>show-category/2,FullHD">FullHD</a></li>
                         <li><a href="#">HD+</a></li>
                         </ul>
                     </li>

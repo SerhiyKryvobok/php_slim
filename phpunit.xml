@@ -12,7 +12,8 @@
          failOnRisky="true"
          failOnWarning="true"
          verbose="true"
-         colors="true">
+         colors="true"
+         testdox="true">
 
     <php>
         <const name="PHPUNIT_TESTSUITE" value="true"/>

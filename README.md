@@ -22,6 +22,7 @@ This is a learning suite based on PHP Slim micro framework. Created in order to 
 
 ## Second iteration task list:
 - [x] TDD continues
+- [x] Added necessary routes, controller methods, view improvements and tests using Selenium Web Driver to perform proper fontend TDD flow
 - [ ] ...
 
 <!-- ## Tech stack
