@@ -12,16 +12,15 @@ class CategoryTree {
             $category['children'] = [];
             if ($category['parent_id'] == $parent_id)
             {
-                $key_of_child = $k;
-                $key_of_parent = array_search($parent_id, array_column($db_array, 'id'));
-                // $db_array[$key_of_child]['children'] = [];
-                // $nested_categories[$key_of_parent]['children'][] = $db_array[$key_of_child];
-                $nested_categories[$key_of_parent]['children'][] = $category;
+                $children = $this->convert($db_array, $category['id']);
+                if ($children)
+                {
+                    $category['children'] = $children;
+                }
+                $nested_categories[] = $category;
             }
-            else
-            $nested_categories[] = $category;
         }
-
+        
         return $nested_categories;
     }
 }

@@ -4,7 +4,14 @@ use App\Services\CategoryTree;
 
 class CategoryTreeTest extends PHPUnit\Framework\TestCase {
 
-    public function testCanConvertDatabaseResultToCategoryArray()
+    protected $category_tree;
+
+    public function setUp(): void
+    {
+        $this->category_tree = new CategoryTree();
+    }
+
+    public function testCanConvertDatabaseResultToCategoryNestedArray()
     {
         $db_result = [
             ['id'=>1, 'name'=>'Electronics', 'parent_id'=>null],
@@ -18,14 +25,11 @@ class CategoryTreeTest extends PHPUnit\Framework\TestCase {
             ['id'=>3, 'name'=>'Software', 'parent_id'=>null, 'children'=>[]],
         ];
 
-        $tree = new CategoryTree();
-        $this->assertEquals($after_conversion, $tree->convert($db_result));
+        $this->assertEquals($after_conversion, $this->category_tree->convert($db_result));
     }
 
     public function testCanConvertDatabaseResultToOneLevelNestedArray()
     {
-        $tree = new CategoryTree();
-
         $db_result = [
             ['id'=>1, 'name'=>'Electronics', 'parent_id'=>null],
             ['id'=>2, 'name'=>'Computers', 'parent_id'=>1],
@@ -47,13 +51,11 @@ class CategoryTreeTest extends PHPUnit\Framework\TestCase {
             ],
         ];
 
-        $this->assertEquals($after_conversion, $tree->convert($db_result));
+        $this->assertEquals($after_conversion, $this->category_tree->convert($db_result));
     }
 
     public function testCanConvertDatabaseResultToTwoLevelNestedArray()
     {
-        $tree = new CategoryTree();
-
         $db_result = [
             ['id'=>1, 'name'=>'Electronics', 'parent_id'=>null],
             ['id'=>2, 'name'=>'Computers', 'parent_id'=>1],
@@ -83,6 +85,6 @@ class CategoryTreeTest extends PHPUnit\Framework\TestCase {
             ],
         ];
 
-        $this->assertEquals($after_conversion, $tree->convert($db_result));
+        $this->assertEquals($after_conversion, $this->category_tree->convert($db_result));
     }
 }
