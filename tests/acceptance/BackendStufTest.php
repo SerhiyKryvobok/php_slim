@@ -33,10 +33,6 @@ class BackendStufTest extends Selenium2TestCase {
         // $capsule::table('categories')->insert(
         //     ['name' => 'Electronics']
         // );
-
-        Category::create([
-            'name' => 'Electronics'
-        ]);
     }
 
     public function setUp(): void
@@ -52,6 +48,10 @@ class BackendStufTest extends Selenium2TestCase {
 
     public function testCanSeeAddedCategories()
     {
+        Category::create([
+            'name' => 'Electronics'
+        ]);
+
         $this->url('');
         $element = $this->byXPath('//ul[@class="dropdown menu"]/li[2]/a');
         $href = $element->attribute('href');
@@ -65,5 +65,17 @@ class BackendStufTest extends Selenium2TestCase {
         $this->assertMatchesRegularExpression('@^http://udemy-phpunit-slim.loc/show-category/[0-9]+,Electronics$@', $href);
     }
 
+    public function testCanAddChildCategory()
+    {
+        $parent_category = Category::where('name', 'Electronics')->first();
+        $child_category = new Category();
+        $child_category->name = 'Monitors';
 
+        $parent_category->children()->save($child_category);
+
+        $element = $this->byXPath('//ul[@class="dropdown menu"]/li[2]/ul[1]/li[1]/a');
+        $href = $element->attribute('href');
+        $this->assertEquals('Monitors', $element->text());
+        $this->assertMatchesRegularExpression('@^http://udemy-phpunit-slim.loc/show-category/[0-9]+,Monitors$@', $href);
+    }
 }
