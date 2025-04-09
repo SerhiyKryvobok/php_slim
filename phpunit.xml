@@ -23,6 +23,13 @@
         <const name="PHPUNIT_TESTSUITE_EXTENSION_SELENIUM2_BROWSER" value="firefox"/>
         <const name="PHPUNIT_TESTSUITE_EXTENSION_SELENIUM_TESTS_URL" value="http://udemy-phpunit-slim.loc/"/>
         <const name="PHPUNIT_TESTSUITE_EXTENSION_SELENIUM_PATH" value="/tmp"/>
+        <!-- DB -->
+        <const name="DB_CONNECTION" value="mysql"/>
+        <const name="DB_HOST" value="127.0.0.1"/>
+        <const name="DB_PORT" value="3306"/>
+        <const name="DB_DATABASE" value=""/>
+        <const name="DB_USERNAME" value="root"/>
+        <const name="DB_PASSWORD" value=""/>
     </php>
 
     <testsuites>
