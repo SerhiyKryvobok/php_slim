@@ -18,9 +18,10 @@
     <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu>
         <li class="menu-text"><a href="<?= $baseUrl; ?>">Multi level categories</a></li>
-        <?php foreach($categories as $category): ?>
+        <?php /* foreach($categories as $category): ?>
             <li><a href="<?= $baseUrl; ?>show-category/<?=$category['id'] . ',' . $category['name'];?>"><?=$category['name'];?></a></li>
-        <?php endforeach; ?>
+        <?php endforeach; */ ?>
+        <?= $categories; ?>
         <?php /* ?><li class="has-submenu">
             <a href="<?= $baseUrl; ?>show-category/1">Electronics</a>
             <ul class="submenu menu vertical" data-submenu>

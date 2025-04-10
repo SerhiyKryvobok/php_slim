@@ -24,6 +24,13 @@ This is a learning suite based on PHP Slim micro framework. Created in order to 
 - [x] TDD continues
 - [x] Added necessary routes, controller methods, view improvements and tests using Selenium Web Driver to perform proper fontend TDD flow
 - [x] Classes & tests refactoring. Using of @dataProvide annotation & recursive method.
+
+> [!CAUTION]
+> Strongly recommended to downgrade PHP version to 7.4 in order to avoid uncompatibility errors
+
+## Third iteration task list:
+- [x] Uncompatibility issues due to PHP version solved.
+- [x] Appeared new issue with Category model fetching in BackendStufTest methods besides first one. Unsolved🤔.
 - [ ] ...
 
 <!-- ## Tech stack
