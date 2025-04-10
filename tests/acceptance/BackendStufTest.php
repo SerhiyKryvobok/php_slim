@@ -70,10 +70,51 @@ class BackendStufTest extends Selenium2TestCase {
         // Below should be in separate test "testCanAddChildCategory", but Category model doesn't fetch somewhy
 
         $electrinics = Category::where('name', 'Electronics')->first();
-        $child_category = new Category;
-        $child_category->name = 'Monitors';
-        $child_category->description = 'Description of monitors';
-        $electrinics->children()->save($child_category);
+        $electrinics->children()->saveMany([
+            new Category(['name' => 'Monitors','description' => 'Description of Monitors']),
+            new Category(['name' => 'Tablets','description' => 'Description of Tablets']),
+            new Category(['name' => 'Computers','description' => 'Description of Computers']),
+        ]);
+
+        $computers = Category::where('name', 'Computers')->first();
+        $computers->children()->saveMany([
+            new Category(['name' => 'Desktops','description' => 'Description of Desktops']),
+            new Category(['name' => 'Notebook','description' => 'Description of Notebook']),
+            new Category(['name' => 'Laptops','description' => 'Description of Laptops']),
+        ]);
+
+        $laptops = Category::where('name', 'Laptops')->first();
+        $laptops->children()->saveMany([
+            new Category(['name' => 'Asus','description' => 'Description of Asus']),
+            new Category(['name' => 'Dell','description' => 'Description of Dell']),
+            new Category(['name' => 'Acer','description' => 'Description of Acer']),
+        ]);
+
+        $acer = Category::where('name', 'Acer')->first();
+        $acer->children()->saveMany([
+            new Category(['name' => 'FullHD','description' => 'Description of FullHD']),
+            new Category(['name' => 'HD+','description' => 'Description of HD+']),
+        ]);
+
+        Category::create([
+            'name'=>'Videos',
+            'description'=>'Description of Videos',
+        ]);
+        Category::create([
+            'name'=>'Software',
+            'description'=>'Description of Software',
+        ]);
+
+        $software = Category::where('name','Software')->first();
+        $software->children()->saveMany([
+            new Category(['name'=>'Operating systems','description'=>'Description of Operating systems']),
+            new Category(['name'=>'Servers','description'=>'Description of Servers'])
+        ]);
+
+        $operating_systems = Category::where('name','Operating systems')->first();
+        $operating_systems->children()->saveMany([
+            new Category(['name'=>'Linux','description'=>'Description of Linux'])
+        ]);
 
         $this->url('');
         $element = $this->byXPath('//ul[@class="dropdown menu"]/li[2]/ul[1]/li[1]/a');
