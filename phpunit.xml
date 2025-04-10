@@ -11,7 +11,7 @@
          convertDeprecationsToExceptions="true"
          failOnRisky="true"
          failOnWarning="true"
-         verbose="true"
+         verbose="false"
          colors="true"
          testdox="true">
 
@@ -35,6 +35,13 @@
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
+        </testsuite>
+
+        <testsuite name="all">
+            <directory>tests/unit</directory>
+            <directory>tests/integration</directory>
+            <file>tests/acceptance/BackendStufTest.php</file>
+            <file>tests/acceptance/FrontendStufTest.php</file>
         </testsuite>
     </testsuites>
 

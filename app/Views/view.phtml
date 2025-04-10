@@ -70,22 +70,19 @@
         <div class="medium-6 large-5 cell large-offset-1">
         <div class="basic-card">
             <div class="basic-card-content content callout secondary">
-            <h5><?= $category ?? 'Choose a category from the menu'; ?></h5>
-            <?php if ($category ?? false): ?>
+            <h5><?= $category->name ?? 'Choose a category from the menu'; ?></h5>
+            <?php if ($category->description ?? false): ?>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi
-                saepe, asperiores dolor nesciunt dolore, accusamus minus
-                repellendus vero odio, quibusdam, ipsum nisi in a molestiae ex
-                assumenda nulla eveniet eos!
+                <?= $category->description; ?>
             </p>
             </div>
             <div class="links callout primary">
                 <ul class="menu">
                     <li>
-                        <a href="<?= $baseUrl; ?>edit-category/1">Edit</a>
+                        <a href="<?= $baseUrl; ?>edit-category/<?= $category->id; ?>">Edit</a>
                     </li>
                     <li>
-                        <a id="delete-category-confirmation" onclick="return confirm('Are you sure?')" href="<?= $baseUrl; ?>delete-category/1">Delete</a>
+                        <a id="delete-category-confirmation" onclick="return confirm('Are you sure?')" href="<?= $baseUrl; ?>delete-category/<?= $category->id; ?>">Delete</a>
                     </li>
                 </ul>
             <?php endif; ?>

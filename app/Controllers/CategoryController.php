@@ -2,12 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Models\Category;
+
 class CategoryController extends BaseController
 {
     public function deleteCategory($request, $response, $args)
     {
         $category_id = $args['id'];
-        // ToDo: delete category by id from the database
+        $category = Category::find($category_id);
+        $category->delete();
+
         $response = $this->container->view->render($response, 'view.phtml', [
             'category_deleted' => true
         ]);
@@ -15,9 +19,11 @@ class CategoryController extends BaseController
     }
     public function showCategory($request, $response, $args)
     {
-        $category_id = $args['id'];
-        // ToDo: get category by id from the database
-        $category = 'Electronics';
+        $category_id = $args['id']; 
+        // $category_id = explode(',', $args['id']); // Not necessary because ::find method below find correct category even when "{id},{name}" string passed
+
+        $category = Category::find($category_id);
+        // $category = Category::find((int)$category_id[0]); // Not necessary as well
         $response = $this->container->view->render($response, 'view.phtml', [
             'category' => $category
         ]);

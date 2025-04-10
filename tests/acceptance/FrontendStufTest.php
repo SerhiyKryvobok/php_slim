@@ -52,20 +52,25 @@ class FrontendStufTest extends Selenium2TestCase {
         $this->acceptAlert();
         sleep(1);
         $this->assertStringContainsString('Category was deleted', $this->source());
+        $this->url('');
+        $this->assertNotRegExp('@Computers</a>@', $this->source());
         $this->markTestIncomplete('Message about deleted category should appear after redirection');
     }
 
     public function testCanSeeEditAndDeleteLinksAndCategoryName()
     {
         $this->url('');
+        sleep(1);
         $electronics = $this->byLinkText('Electronics');
         $electronics->click();
+        sleep(1);
         $h5 = $this->byCssSelector('div.basic-card-content h5');
         $this->assertStringContainsString('Electronics', $h5->text());
 
         $editLink = $this->byLinkText('Edit');
         $href = $editLink->attribute('href');
         $this->assertStringContainsString('edit-category/1', $href);
+        $this->assertStringContainsString('Description of Electronics', $this->source());
 
         $this->markTestIncomplete('Category name, description, edit,delete links must be dinamic');
     }

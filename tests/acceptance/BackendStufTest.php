@@ -30,6 +30,7 @@ class BackendStufTest extends Selenium2TestCase {
             $table->string('name')->nullable(false);
             $table->text('description')->nullable(false);
             $table->bigInteger('parent_id')->unsigned()->nullable();
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
         });
 
         // $capsule::table('categories')->insert(
@@ -52,7 +53,7 @@ class BackendStufTest extends Selenium2TestCase {
     {
         Category::create([
             'name' => 'Electronics',
-            'description' => 'Description of electronics'
+            'description' => 'Description of Electronics'
         ]);
 
         $this->url('');

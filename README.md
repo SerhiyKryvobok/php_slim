@@ -1,9 +1,6 @@
 ## 🖖 Hello!
 This is a learning suite based on PHP Slim micro framework. Created in order to setup unit testing && TDD approach learning environment.
 
-<!-- > [!NOTE]
-> On setup stage. -->
-
 > [!TIP]
 > Additional development vector opened. PHP learning suite under Slim arch.
 
@@ -28,9 +25,13 @@ This is a learning suite based on PHP Slim micro framework. Created in order to 
 > [!CAUTION]
 > Strongly recommended to downgrade PHP version to 7.4 in order to avoid uncompatibility errors
 
+> [!NOTE]
+> There are a lot of sleep() functions in tests, it placed due to local server behaviour and propably shouldn't be necessary in other environments.
+
 ## Third iteration task list:
 - [x] Uncompatibility issues due to PHP version solved.
 - [x] Appeared new issue with Category model fetching in BackendStufTest methods besides first one. Unsolved🤔.
+- [x] Another integration test.
 - [ ] ...
 
 <!-- ## Tech stack
