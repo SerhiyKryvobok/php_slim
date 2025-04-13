@@ -29,89 +29,11 @@ class FrontendStufTest extends Selenium2TestCase {
         $this->assertStringContainsString('Add a new category', $this->source());
     }
 
-    public function testCanSeeConfirmDialogBoxWhenTryingToDeleteCategory()
-    {
-        $this->url('show-category/1');
-        $this->clickOnElement('delete-category-confirmation');
-        $this->waitUntil(function () {
-            if ($this->alertIsPresent()) return true;
-            return null;
-        }, 4000);
-        $this->dismissAlert();
-        $this->assertTrue(true);
-    }
-
-    public function testCanSeeCorrectMessageAfterDeletingCategory()
-    {
-        $this->url('show-category/1');
-        $this->clickOnElement('delete-category-confirmation');
-        $this->waitUntil(function () {
-            if ($this->alertIsPresent()) return true;
-            return null;
-        }, 4000);
-        $this->acceptAlert();
-        sleep(1);
-        $this->assertStringContainsString('Category was deleted', $this->source());
-        $this->url('');
-        $this->assertNotRegExp('@Computers</a>@', $this->source());
-        $this->markTestIncomplete('Message about deleted category should appear after redirection');
-    }
-
-    public function testCanSeeEditAndDeleteLinksAndCategoryName()
-    {
-        $this->url('');
-        sleep(1);
-        $electronics = $this->byLinkText('Electronics');
-        $electronics->click();
-        sleep(1);
-        $h5 = $this->byCssSelector('div.basic-card-content h5');
-        $this->assertStringContainsString('Electronics', $h5->text());
-
-        $editLink = $this->byLinkText('Edit');
-        $href = $editLink->attribute('href');
-        $this->assertStringContainsString('edit-category/1', $href);
-        $this->assertStringContainsString('Description of Electronics', $this->source());
-
-        $this->markTestIncomplete('Category name, description, edit,delete links must be dinamic');
-    }
-
-    public function testCanSeeEditCategoryMessage()
-    {
-        $this->url('show-category/1');
-        $editLink = $this->byLinkText('Edit');
-        $editLink->click();
-        $this->assertStringContainsString('Edit category', $this->source());
-
-        $this->markTestIncomplete('Make input values dinamic');
-    }
-
-    public function testCanSeeFormValidation()
-    {
-        $this->url('');
-        $btn = $this->byCssSelector('input[type="submit"]');
-        $btn->submit();
-        sleep(1);
-        $this->assertStringContainsString('Fill correctly the form', $this->source());
-
-        $this->back();
-        sleep(1);
-        $categoryName = $this->byName('category-name');
-        $categoryName->value('Name');
-        $categoryDescription = $this->byName('category-description');
-        $categoryDescription->value('Description');
-        $btn = $this->byCssSelector('input[type="submit"]');
-        $btn->submit();
-        sleep(1);
-        $this->assertStringContainsString('Category was saved', $this->source());
-
-        $this->markTestIncomplete('More jobs with html form needed');
-    }
-
     public function testCanSeeNestedCategories()
     {
         $this->url('');
         $categories = $this->elements($this->using('css selector')->value('ul.dropdown li'));
-        $this->assertEquals(18, count($categories));
+        $this->assertEquals(19, count($categories));
 
         $elem = $this->byCssSelector('ul.dropdown > li:nth-child(2) > a');
         $this->assertEquals('Electronics', $elem->text());
@@ -132,5 +54,88 @@ class FrontendStufTest extends Selenium2TestCase {
         $elem = $this->byXPath('//ul[@class="dropdown menu"]/li[2]//ul[1]//ul[1]//ul[1]//ul[1]/li[1]/a');
         $href = $elem->attribute('href');
         $this->assertMatchesRegularExpression('@^http://udemy-phpunit-slim.loc/show-category/[0-9]+,FullHD$@', $href);
+    }
+
+    /**
+     * @depends testCanSeeNestedCategories
+     */
+    public function testCanSeeConfirmDialogBoxWhenTryingToDeleteCategory()
+    {
+        $this->url('show-category/1');
+        $this->clickOnElement('delete-category-confirmation');
+        $this->waitUntil(function () {
+            if ($this->alertIsPresent()) return true;
+            return null;
+        }, 4000);
+        $this->dismissAlert();
+        $this->assertTrue(true);
+    }
+
+    /**
+     * @depends testCanSeeConfirmDialogBoxWhenTryingToDeleteCategory
+     */
+    public function testCanSeeCorrectMessageAfterDeletingCategory()
+    {
+        $this->url('show-category/4');
+        $this->clickOnElement('delete-category-confirmation');
+        $this->waitUntil(function () {
+            if ($this->alertIsPresent()) return true;
+            return null;
+        }, 4000);
+        $this->acceptAlert();
+        sleep(1);
+        $this->assertStringContainsString('Category was deleted', $this->source());
+        $this->url('');
+        $this->assertDoesNotMatchRegularExpression('@Computers</a>@', $this->source());
+    }
+
+    public function testCanSeeEditAndDeleteLinksAndCategoryName()
+    {
+        $this->url('');
+        sleep(1);
+        $electronics = $this->byLinkText('Electronics');
+        $electronics->click();
+        sleep(1);
+        $h5 = $this->byCssSelector('div.basic-card-content h5');
+        $this->assertStringContainsString('Electronics', $h5->text());
+
+        $editLink = $this->byLinkText('Edit');
+        $href = $editLink->attribute('href');
+        $this->assertStringContainsString('edit-category/1', $href);
+        $this->assertStringContainsString('Description of Electronics', $this->source());
+    }
+
+    public function testCanSeeEditCategoryMessage()
+    {
+        $this->url('show-category/1');
+        $editLink = $this->byLinkText('Edit');
+        $editLink->click();
+        $this->assertStringContainsString('Edit category', $this->source());
+    }
+
+    public function testCanSeeFormValidation()
+    {
+        $this->url('');
+        $btn = $this->byCssSelector('input[type="submit"]');
+        $btn->submit();
+        sleep(1);
+        $this->assertStringContainsString('Fill correctly the form', $this->source());
+
+        $this->back();
+        sleep(1);
+        $categoryName = $this->byName('category-name');
+        $categoryName->value('Name');
+        $categoryDescription = $this->byName('category-description');
+        $categoryDescription->value('Description');
+        $btn = $this->byCssSelector('input[type="submit"]');
+        $btn->submit();
+        sleep(1);
+        $this->assertStringContainsString('Category was saved', $this->source());
+    }
+
+    public function testCanSeeSelectOptionList()
+    {
+        $this->url('');
+        $this->assertStringContainsString('&nbsp;&nbsp;&nbsp;&nbsp;Linux', $this->source());
     }
 }

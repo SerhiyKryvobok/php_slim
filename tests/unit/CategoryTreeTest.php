@@ -49,9 +49,9 @@ class CategoryTreeTest extends PHPUnit\Framework\TestCase {
                 ],
                 '<li><a href="http://udemy-phpunit-slim.loc/show-category/1,Electronics">Electronics</a></li><li><a href="http://udemy-phpunit-slim.loc/show-category/2,Videos">Videos</a></li><li><a href="http://udemy-phpunit-slim.loc/show-category/3,Software">Software</a></li>',
                 [
-                    ['name'=>'Electronics'],
-                    ['name'=>'Videos'],
-                    ['name'=>'Software'],
+                    ['name'=>'Electronics', 'id'=>1],
+                    ['name'=>'Videos', 'id'=>2],
+                    ['name'=>'Software', 'id'=>3],
                 ]
             ],
             'two level' => [
@@ -76,8 +76,8 @@ class CategoryTreeTest extends PHPUnit\Framework\TestCase {
                 ],
                 '<li><a href="http://udemy-phpunit-slim.loc/show-category/1,Electronics">Electronics</a><ul class="submenu menu vertical" data-submenu><li><a href="http://udemy-phpunit-slim.loc/show-category/2,Computers">Computers</a></li></ul></li>',
                 [
-                    ['name'=>'Electronics'],
-                    ['name'=>'&nbsp;&nbsp;Computers'],
+                    ['name'=>'Electronics', 'id'=>1],
+                    ['name'=>'&nbsp;&nbsp;Computers', 'id'=>2],
                 ]
             ],
             'three level' => [
@@ -110,9 +110,9 @@ class CategoryTreeTest extends PHPUnit\Framework\TestCase {
                 ],
                 '<li><a href="http://udemy-phpunit-slim.loc/show-category/1,Electronics">Electronics</a><ul class="submenu menu vertical" data-submenu><li><a href="http://udemy-phpunit-slim.loc/show-category/2,Computers">Computers</a><ul class="submenu menu vertical" data-submenu><li><a href="http://udemy-phpunit-slim.loc/show-category/3,Laptops">Laptops</a></li></ul></li></ul></li>',
                 [
-                    ['name'=>'Electronics'],
-                    ['name'=>'&nbsp;&nbsp;Computers'],
-                    ['name'=>'&nbsp;&nbsp;&nbsp;&nbsp;Laptops'],
+                    ['name'=>'Electronics', 'id'=>1],
+                    ['name'=>'&nbsp;&nbsp;Computers', 'id'=>2],
+                    ['name'=>'&nbsp;&nbsp;&nbsp;&nbsp;Laptops', 'id'=>3],
                 ]
             ],
         ];

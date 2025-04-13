@@ -17,6 +17,16 @@ This is a learning suite based on PHP Slim micro framework. Created in order to 
 > [!CAUTION]
 > Due to misleading in versions or outdating in between phpunit-selenium and webdriver or etc, there are necesity in correction of local core vendor functionality.
 
+<!-- 
+This necessary corr in SeleniumTestSuite.php on line 159 in loop to avoid Selenium from running all class methods, and provoke looong loop.
+if (!TestUtil::isTestMethod($method)) {
+    continue;
+}
+if (!$method->isPublic()) {
+    continue;
+}
+-->
+
 ## Second iteration task list:
 - [x] TDD continues
 - [x] Added necessary routes, controller methods, view improvements and tests using Selenium Web Driver to perform proper fontend TDD flow

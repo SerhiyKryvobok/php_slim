@@ -11,9 +11,9 @@
          convertDeprecationsToExceptions="true"
          failOnRisky="true"
          failOnWarning="true"
-         verbose="false"
+         verbose="true"
          colors="true"
-         testdox="true">
+         testdox="false">
 
     <php>
         <const name="PHPUNIT_TESTSUITE" value="true"/>
@@ -41,6 +41,18 @@
             <directory>tests/unit</directory>
             <directory>tests/integration</directory>
             <file>tests/acceptance/BackendStufTest.php</file>
+            <file>tests/acceptance/FrontendStufTest.php</file>
+        </testsuite>
+
+        <testsuite name="int">
+            <directory>tests/integration</directory>
+        </testsuite>
+
+        <testsuite name="acc-back">
+            <file>tests/acceptance/BackendStufTest.php</file>
+        </testsuite>
+
+        <testsuite name="acc-front">
             <file>tests/acceptance/FrontendStufTest.php</file>
         </testsuite>
     </testsuites>

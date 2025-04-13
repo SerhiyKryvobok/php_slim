@@ -9,7 +9,7 @@ class CategoriesFactory {
     // convert result to nested array
     // convert to string
 
-    public static function create(): string
+    public static function create(): array
     {
         $categories = Category::all()->toArray();
 
@@ -26,8 +26,12 @@ class CategoriesFactory {
         // };
 
         $htmlList = new HtmlList();
+        $selectList = new ForSelectList();
 
         $converted_array = $htmlList->convert($categories);
-        return $htmlList->makeUlList($converted_array);
+        return [
+            'menu_categories' => $htmlList->makeUlList($converted_array),
+            'select_list_categories' => $selectList->makeSelectList($converted_array),
+        ];
     }
 }

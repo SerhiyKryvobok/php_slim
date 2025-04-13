@@ -15,15 +15,18 @@ class CategoryController extends BaseController
         $response = $this->container->view->render($response, 'view.phtml', [
             'category_deleted' => true
         ]);
-        return $response;
+
+        $_SESSION['category_deleted'] = true;
+
+        return $response->withRedirect('/', 301);
     }
     public function showCategory($request, $response, $args)
     {
-        $category_id = $args['id']; 
-        // $category_id = explode(',', $args['id']); // Not necessary because ::find method below find correct category even when "{id},{name}" string passed
+        // $category_id = $args['id']; 
+        $category_id = explode(',', $args['id']); // Not necessary because ::find method below find correct category even when "{id},{name}" string passed
 
-        $category = Category::find($category_id);
-        // $category = Category::find((int)$category_id[0]); // Not necessary as well
+        // $category = Category::find($category_id);
+        $category = Category::find((int)$category_id[0]); // Not necessary as well
         $response = $this->container->view->render($response, 'view.phtml', [
             'category' => $category
         ]);
@@ -32,8 +35,7 @@ class CategoryController extends BaseController
     public function editCategory($request, $response, $args)
     {
         $category_id = $args['id'];
-        // ToDo: get category by id from the database
-        $category = ['name'=>'Electronics', 'parent'=>null];
+        $category = Category::find($category_id);
         $response = $this->container->view->render($response, 'view.phtml', [
             'editedCategory' => $category
         ]);
@@ -42,14 +44,30 @@ class CategoryController extends BaseController
     public function saveCategory($request, $response, $args)
     {
         $data = $request->getParsedBody();
-        if (empty($data['category-name']) || empty($data['category-description']))
+        if (empty($data['category-name']) || empty($data['category-description'])) {
             $categorySaved = false;
-        else
+            // $_SESSION['category_saved'] = false;
+        }
+        else {
+            if (isset($data['category_id'])) {
+                $category = Category::find($data['category_id']);
+            } 
+            else {
+                $category = new Category;
+            }
+            $category->name = $data['category-name'];
+            $category->description = $data['category-description'];
+            $category->parent_id = $data['category-parent'] == '' ? null : $data['category-parent'];
+            $category->save();
+
             $categorySaved = true;
+            // $_SESSION['category_saved'] = true;
+        } 
         // ToDo: save category props to the database
         $response = $this->container->view->render($response, 'view.phtml', [
             'categorySaved' => $categorySaved
         ]);
         return $response;
+        // return $response->withRedirect('/', 301);
     }
 }

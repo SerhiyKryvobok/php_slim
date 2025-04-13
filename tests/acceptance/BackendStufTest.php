@@ -67,11 +67,15 @@ class BackendStufTest extends Selenium2TestCase {
         $href = $element->attribute('href');
         $this->assertEquals('Electronics', $element->text());
         $this->assertMatchesRegularExpression('@^http://udemy-phpunit-slim.loc/show-category/[0-9]+,Electronics$@', $href);
+    }
 
-        // Below should be in separate test "testCanAddChildCategory", but Category model doesn't fetch somewhy
-
-        $electrinics = Category::where('name', 'Electronics')->first();
-        $electrinics->children()->saveMany([
+    /**
+     * @depends testCanSeeAddedCategories
+     */
+    public function testCanAddChildCategory()
+    {
+        $electronics = Category::where('name', 'Electronics')->first();
+        $electronics->children()->saveMany([
             new Category(['name' => 'Monitors','description' => 'Description of Monitors']),
             new Category(['name' => 'Tablets','description' => 'Description of Tablets']),
             new Category(['name' => 'Computers','description' => 'Description of Computers']),
@@ -124,9 +128,99 @@ class BackendStufTest extends Selenium2TestCase {
         $this->assertMatchesRegularExpression('@^http://udemy-phpunit-slim.loc/show-category/[0-9]+,Monitors$@', $href);
     }
 
-    // public function testCanAddChildCategory()
-    // {
-    // 
-    // }
+    /**
+     * @depends testCanAddChildCategory
+     */
+    public function testCanSeePopulatedFormDataWhenCategoryIsEdited()
+    {
+        $this->url('edit-category/17');
+        sleep(1);
+        $category_name = $this->byName('category-name');
+        $name = $category_name->value();
+        $this->assertSame('Linux', $name);
+
+        $category_desc = $this->byName('category-description');
+        $desc = $category_desc->value();
+        $this->assertSame('Description of Linux', $desc);
+    }
+
+    /**
+     * @depends testCanSeePopulatedFormDataWhenCategoryIsEdited
+     */
+    public function testCanSeeCorrectParentCategoryWhenEditedChildCategory()
+    {
+        $this->url('edit-category/17');
+        sleep(1);
+        $select = $this->select($this->byId('select_category_list'))->selectedValue();
+        $this->assertSame('15', $select);
+    }
+
+    /**
+     * @depends testCanSeeCorrectParentCategoryWhenEditedChildCategory
+     */
+    public function testCanSeeCategoryIdToBeEdited()
+    {
+        $this->url('edit-category/17');
+        $this->assertStringContainsString('input type="hidden" name="category_id"', $this->source());
+
+        $this->url('show-category/17,Linux');
+        sleep(1);
+        $this->assertStringNotContainsString('input type="hidden" name="category_id"', $this->source());
+    }
+
+    /**
+     * @depends testCanSeeCategoryIdToBeEdited
+     */
+    public function testCanEditCategory()
+    {
+        $this->url('edit-category/17');
+        $categoryName = $this->byName('category-name');
+        $categoryName->clear();
+        $categoryName->value('Windows');
+
+        $categoryDescription = $this->byName('category-description');
+        $categoryDescription->clear();
+        $categoryDescription->value('Description of Windows');
+
+        $this->select($this->byId('select_category_list'))->selectOptionByValue('16');
+
+        $button = $this->byCssSelector('input[type="submit"]');
+        $button->submit();
+        $this->url('');
+        sleep(1);
+        $this->assertStringNotContainsString('Linux', $this->source());
+
+        $this->url('edit-category/17');
+        sleep(1);
+        $categoryName = $this->byName('category-name');
+        $categoryName->clear();
+        $categoryName->value('Linux');
+        $categoryDescription = $this->byName('category-description');
+        $categoryDescription->clear();
+        $categoryDescription->value('Description of Linux');
+        $this->select($this->byId('select_category_list'))->selectOptionByValue('15');
+        $button = $this->byCssSelector('input[type="submit"]');
+        $button->submit();
+    }
+
+    /**
+     * @depends testCanEditCategory
+     */
+    public function testCanAddCategory()
+    {
+        $this->url('');
+        sleep(1);
+        $categoryName = $this->byName('category-name');
+        $categoryName->value('Windows');
+        $categoryDescription = $this->byName('category-description');
+        $categoryDescription->value('Description of Windows');
+        $this->select($this->byId('select_category_list'))->selectOptionByValue('15');
+        $button = $this->byCssSelector('input[type="submit"]');
+        $button->submit();
+        sleep(1);
+        $this->url('show-category/18,Windows');
+        sleep(1);
+        $this->assertStringContainsString('Description of Windows', $this->source());
+    }
  
 }

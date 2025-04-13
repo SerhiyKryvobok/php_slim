@@ -9,7 +9,10 @@ class ForSelectList extends CategoryTree {
     public function makeSelectList(array $converted_db_array, int $repeat = 0): array
     {
         foreach ($converted_db_array as $value) {
-            $this->categoryList[] = ['name'=> str_repeat('&nbsp;', $repeat) . $value['name']];
+            $this->categoryList[] = [
+                'id' => $value['id'],
+                'name'=> str_repeat('&nbsp;', $repeat) . $value['name']
+            ];
             if (!empty($value['children']))
             {
                 $repeat = $repeat + 2;

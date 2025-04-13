@@ -1,6 +1,7 @@
 <?php
 
 use Slim\Container;
+use App\Services\CategoriesFactory;
 use App\Controllers\CategoryController;
 
 class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
@@ -30,6 +31,10 @@ class CategoryControllerTest extends \PHPUnit\Framework\TestCase {
         $container['view'] = new \Slim\Views\PhpRenderer('./app/Views/', [
             'baseUrl' => 'http://udemy-phpunit-slim.loc/'
         ]);
+
+        $categories = CategoriesFactory::create();
+        $container->view->addAttribute('categories', $categories['menu_categories']);
+        $container->view->addAttribute('select_list_categories', $categories['select_list_categories']);
 
         self::$controller = new CategoryController($container);
     }
