@@ -42,7 +42,8 @@ if (!$method->isPublic()) {
 - [x] Uncompatibility issues due to PHP version solved.
 - [x] Appeared new issue with Category model fetching in BackendStufTest methods besides first one. Unsolved🤔.
 - [x] Another integration test.
-- [ ] ...
+- [x] Core testing learning suite app finished. But everytime there are a place for refactoring.
+- [x] App ready. But still doesnt resolved issue with post request and session vars. When unset method has strange behaviour and break logic.
 
 <!-- ## Tech stack
 | th1 | th2  | th3 | th4 |
@@ -51,7 +52,6 @@ if (!$method->isPublic()) {
 
 > [!WARNING]
 > Urgent info that needs immediate user attention to avoid problems.
-
 -->
 
 ### 🤝 Interested in colaboration ? Feel free to join! 😎

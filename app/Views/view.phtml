@@ -18,10 +18,16 @@
             Fill correctly the form
         </div>
         <?php endif; ?>
+        <?php /* if (isset($_SESSION['category_saved'])): ?>
+            <div class="callout success">
+                Session test. Category was saved
+            </div>
+        <?php print_r($_SESSION); //unset($_SESSION['category_saved']); 
+        endif; */?>
         <?php if ($_SESSION['category_deleted'] ?? false): ?>
-        <div class="callout alert">
-            Category was deleted
-        </div>
+            <div class="callout alert">
+                Category was deleted
+            </div>
         <?php unset($_SESSION['category_deleted']); endif; ?>
             <form action="<?= $baseUrl; ?>save-category" method="POST">
                 <label
@@ -83,4 +89,3 @@
     <hr />
 </div>
 <?php include('layout/footer.phtml'); ?>
-

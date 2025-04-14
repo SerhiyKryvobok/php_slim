@@ -2,6 +2,7 @@
 
 return [
     'displayErrorDetails' => true,
+    'session.handler' => null,
     'db' => [
         'driver' => 'mysql',
         'host' => '127.0.0.1',

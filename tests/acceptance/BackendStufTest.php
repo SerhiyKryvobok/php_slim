@@ -1,27 +1,32 @@
 <?php
 
 use App\Models\Category;
+use App\Services\DataBaseConnection;
 use PHPUnit\Extensions\Selenium2TestCase;
 
 class BackendStufTest extends Selenium2TestCase {
 
     public static function setUpBeforeClass(): void
     {
-        $capsule = new \Illuminate\Database\Capsule\Manager;
+        // $capsule = new \Illuminate\Database\Capsule\Manager;
 
-        $capsule->addConnection([
-            'driver' => 'mysql',
-            'host' => '127.0.0.1',
-            'database' => 'php-slim',
-            'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-        ]);
+        // $capsule->addConnection([
+        //     'driver' => 'mysql',
+        //     'host' => '127.0.0.1',
+        //     'database' => 'php-slim',
+        //     'username' => 'root',
+        //     'password' => '',
+        //     'charset' => 'utf8mb4',
+        //     'collation' => 'utf8mb4_unicode_ci',
+        //     'prefix' => '',
+        // ]);
 
-        $capsule->setAsGlobal(); // allow static methods
-        $capsule->bootEloquent(); // setup the Eloquent ORM
+        // $capsule->setAsGlobal(); // allow static methods
+        // $capsule->bootEloquent(); // setup the Eloquent ORM
+
+        // $dbConn = new DataBaseConnection;
+        // $capsule = $dbConn->create();
+        $capsule = DataBaseConnection::create();
 
         $capsule::schema()->dropIfExists('categories');
 

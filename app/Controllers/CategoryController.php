@@ -43,10 +43,11 @@ class CategoryController extends BaseController
     }
     public function saveCategory($request, $response, $args)
     {
+        $_SESSION['category_saved'] = false;
+
         $data = $request->getParsedBody();
         if (empty($data['category-name']) || empty($data['category-description'])) {
             $categorySaved = false;
-            // $_SESSION['category_saved'] = false;
         }
         else {
             if (isset($data['category_id'])) {
@@ -61,13 +62,14 @@ class CategoryController extends BaseController
             $category->save();
 
             $categorySaved = true;
-            // $_SESSION['category_saved'] = true;
+            $_SESSION['category_saved'] = true;
         } 
-        // ToDo: save category props to the database
+
         $response = $this->container->view->render($response, 'view.phtml', [
-            'categorySaved' => $categorySaved
+            'categorySaved' => $categorySaved,
         ]);
-        return $response;
-        // return $response->withRedirect('/', 301);
+
+        /* if ($categorySaved) return $response->withRedirect('/', 303);
+        else */ return $response;
     }
 }
